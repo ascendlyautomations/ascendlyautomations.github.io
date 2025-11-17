@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Ascendly Automations builds AI receptionists for small businesses, handling calls, bookings, and quotes 24/7." />
 
-  <!-- Google Font similar to Wix style -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -275,11 +275,19 @@
     }
 
     /* WELCOME & VISION */
-    .avatar {
+    .welcome-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .welcome-avatar {
       border-radius: 30px;
       overflow: hidden;
       box-shadow: var(--shadow-soft);
       max-width: 360px;
+      margin-left: auto;
     }
 
     .vision-image {
@@ -475,7 +483,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+
+      .section {
+        padding: 56px 18px;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
       .hero-grid,
+      .welcome-layout,
       .two-col,
       .pricing-grid,
       .three-cols,
@@ -491,12 +509,38 @@
         display: none;
       }
 
-      .section {
-        padding: 56px 18px;
+      /* Text first → image underneath for hero */
+      .hero-grid > div:first-child {
+        order: 1;
+      }
+      .hero-grid > div:last-child {
+        order: 2;
       }
 
-      .hero {
-        padding-top: 36px;
+      /* Welcome: text first, image under text */
+      .welcome-layout {
+        gap: 32px;
+      }
+      .welcome-text {
+        order: 1;
+      }
+      .welcome-avatar {
+        order: 2;
+        margin: 0 auto;
+        max-width: 280px;
+      }
+
+      /* Vision: text first, image under text */
+      .two-col#vision-grid {
+        gap: 32px;
+      }
+      .vision-text {
+        order: 1;
+      }
+      .vision-image {
+        order: 2;
+        max-width: 320px;
+        margin: 0 auto;
       }
 
       .avatar,
@@ -511,6 +555,29 @@
 
       .three-cols {
         gap: 20px;
+      }
+
+      /* Shrink buttons on mobile */
+      .btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 11px 16px;
+        font-size: 15px;
+        border-radius: 16px;
+      }
+
+      .btn-primary,
+      .btn-outline {
+        margin-left: 0;
+      }
+
+      .hero .btn-primary {
+        margin-top: 8px;
+      }
+
+      .center .btn {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   </style>
@@ -535,6 +602,7 @@
   <!-- HERO: YOUR AUTOMATED ASSISTANT -->
   <section class="section hero">
     <div class="container hero-grid">
+      <!-- Text first (desktop & mobile) -->
       <div>
         <span class="pill">Ascendly Automations</span>
         <h1 style="margin-top:18px;">
@@ -561,21 +629,17 @@
         </p>
       </div>
 
+      <!-- Couch image (hero) -->
       <div class="hero-image-wrap">
-        <!-- Couch image (hero) -->
         <img src="IMG_2958 (1).jpeg" alt="Founder sitting on couch" />
       </div>
     </div>
   </section>
 
-  <!-- WELCOME (moved directly after hero) -->
+  <!-- WELCOME (text first, then headshot; sits between images visually on mobile) -->
   <section class="section section-alt" id="welcome">
-    <div class="container two-col">
-      <div class="avatar">
-        <!-- Headshot for Welcome -->
-        <img src="IMG_2959 (1).jpeg" alt="Nick Rivard-Lentz headshot" />
-      </div>
-      <div>
+    <div class="container welcome-layout">
+      <div class="welcome-text">
         <h2>Welcome</h2>
         <p class="lead">
           At Ascendly Automations, we specialize in helping small businesses grow by making
@@ -583,13 +647,17 @@
           appointments, and send confirmations — so you never miss another customer opportunity.
         </p>
       </div>
+      <div class="welcome-avatar">
+        <!-- Headshot for Welcome -->
+        <img src="IMG_2959 (1).jpeg" alt="Nick Rivard-Lentz headshot" />
+      </div>
     </div>
   </section>
 
-  <!-- OUR VISION (after Welcome) -->
+  <!-- OUR VISION (text + vision image) -->
   <section class="section" id="vision">
-    <div class="container two-col">
-      <div>
+    <div class="container two-col" id="vision-grid">
+      <div class="vision-text">
         <h2>Our Vision</h2>
         <p class="lead">
           Our vision at Ascendly Automation is to keep small business up to date with technology and
